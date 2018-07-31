@@ -9,7 +9,7 @@ class BookDetailView(generic.DetailView):
 
 class BookListView(generic.ListView):
     model = Book
-
+    paginate_by = 10
 
 # Create your views here.
 def index(request):

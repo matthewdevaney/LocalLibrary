@@ -1,5 +1,14 @@
 from django.shortcuts import render
+from django.views import generic
 from .models import Book, Author, BookInstance, Genre
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+
+class BookListView(generic.ListView):
+    model = Book
 
 
 # Create your views here.

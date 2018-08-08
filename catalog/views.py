@@ -14,7 +14,7 @@ from .forms import RenewBookForm
 class AuthorCreate(CreateView):
     model = Author
     fields = '__all__'
-    initial = {'date_of_death': '05/01/2018', }
+    # initial = {'date_of_death': '05/01/2018', }
 
 
 class AuthorUpdate(UpdateView):
@@ -34,6 +34,21 @@ class AuthorDetailView(generic.DetailView):
 class AuthorListView(generic.ListView):
     model = Author
     paginate_by = 10
+
+
+class BookCreate(CreateView):
+    model = Book
+    fields = '__all__'
+
+
+class BookUpdate(UpdateView):
+    model = Book
+    fields = ['title', 'Author', 'Summary', 'ISBN', 'Genre', 'Language']
+
+
+class BookDelete(DeleteView):
+    model = Book
+    success_url = reverse_lazy('books')
 
 
 class BookDetailView(generic.DetailView):

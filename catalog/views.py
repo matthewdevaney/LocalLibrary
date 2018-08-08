@@ -2,12 +2,29 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
-from .models import Book, Author, BookInstance
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Author, Book, BookInstance
 import datetime
 
 from .forms import RenewBookForm
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = '__all__'
+    initial = {'date_of_death': '05/01/2018', }
+
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('authors')
 
 
 class AuthorDetailView(generic.DetailView):
